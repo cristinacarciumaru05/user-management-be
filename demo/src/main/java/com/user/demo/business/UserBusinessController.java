@@ -130,6 +130,13 @@ public class UserBusinessController {
             userDataController.deleteUserFromGroup(email,name);
     }
 
+    public List<Tbugr001> findGroupByUser(String email) {
+        return userDataController.findGroupByUser(email);
+    }
+
+    public List<Tbugr001> findUserByGroup(String name) {
+        return userDataController.findUserByGroup(name);
+    }
     public boolean isAdmin(String email) {
         if(email== "admin"){
             return true;

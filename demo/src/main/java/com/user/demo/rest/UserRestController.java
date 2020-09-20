@@ -98,6 +98,16 @@ public class UserRestController {
         businessController.deleteUserFromGroup(email,name);
     }
 
+    @GetMapping("/get-group-by-user")
+    public List<Tbugr001> findGroupByUser(@RequestParam String email) {
+        return businessController.findGroupByUser(email);
+    }
+
+    @GetMapping("/get-user-by-group")
+    public List<Tbugr001> findUserByGroup(@RequestParam String name) {
+        return businessController.findUserByGroup(name);
+    }
+
     @GetMapping("/get-groups")
     public List<Tbgroups> getGroups() {
         return businessController.getGroups();

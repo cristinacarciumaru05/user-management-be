@@ -56,9 +56,14 @@ public interface MyBatisRepository {
     @Select("SELECT * FROM tbugr001 where name =#{name}")
     public Tbugr001 findUserGroup(String name);
 
+    @Select("SELECT * FROM tbugr001 where email =#{email}")
+    public List<Tbugr001> findGroupByUser(String email);
+
     @Delete("DELETE FROM tbugr001 where name =#{name}")
     public void deleteUserGroup(String name);
 
+    @Select("SELECT * FROM tbugr001 where name =#{name}")
+    public List<Tbugr001> findUserByGroup(String name);
 
     @Delete("DELETE FROM tbugr001 where email =#{email} and name=#{name}")
     public void deleteUserFromGroup(String email,String name);

@@ -92,6 +92,14 @@ public class UserDataController {
     public void deleteUserGroup(String name) {
         myBatisRepository.deleteUserGroup(name);
     }
+    public List<Tbugr001> findGroupByUser(String email) {
+        return myBatisRepository.findGroupByUser(email);
+    }
+
+    public List<Tbugr001> findUserByGroup(String name) {
+        return myBatisRepository.findUserByGroup(name);
+    }
+
     public void deleteUserFromGroup(String email,String name) {
         myBatisRepository.deleteUserFromGroup(email,name);
     }
