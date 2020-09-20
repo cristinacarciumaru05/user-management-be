@@ -1,5 +1,6 @@
 package com.user.demo.repository;
 
+import com.user.demo.bean.Groups;
 import com.user.demo.bean.Tbu4001;
 import com.user.demo.bean.Tbugr001;
 import org.apache.ibatis.annotations.Mapper;
@@ -35,7 +36,7 @@ public interface MyBatisRepository {
     public int addUserToGroup(Tbu4001 user);
 
     @Select("select * from tbugr001")
-    public List<Tbugr001> getGroups();
+    public List<Tbugr001> getGroupsWithUser();
 
     @Insert("INSERT INTO tbugr001(name) " +
             " VALUES (#{name})")
@@ -46,5 +47,8 @@ public interface MyBatisRepository {
 
     @Select("SELECT * FROM tbu4001 where email =#{email} AND password=#{password}")
     public boolean checkPassword(String email, String password);
+
+    @Select("SELECT * FROM groups ")
+    public List<Groups> getGroups();
 
 }

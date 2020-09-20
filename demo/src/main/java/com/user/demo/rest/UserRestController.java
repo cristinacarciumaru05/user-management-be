@@ -2,6 +2,7 @@ package com.user.demo.rest;
 
 import com.user.demo.MessageHandler;
 import com.user.demo.auth.CustomAuthenticationProvider;
+import com.user.demo.bean.Groups;
 import com.user.demo.bean.Tbu4001;
 import com.user.demo.bean.Tbugr001;
 import com.user.demo.business.UserBusinessController;
@@ -29,10 +30,12 @@ public class UserRestController {
     public MessageHandler setCurrentUser(@RequestBody Tbu4001 user){
         return businessController.setCurrentUser(user);
     }
+
     @PutMapping("/logout")
     public void logoutUser(){
         businessController.logoutUser();
     }
+
     @GetMapping("/get-users")
     public List<Tbu4001> getUsers() {
         return businessController.getUsers();
@@ -49,8 +52,8 @@ public class UserRestController {
     }
 
     @PostMapping("/add-user")
-    public void addUser(@RequestBody Tbu4001 user){
-        businessController.addUser(user);
+    public MessageHandler addUser(@RequestBody Tbu4001 user){
+        return businessController.addUser(user);
     }
 
     @PostMapping("/update-user")
@@ -59,17 +62,18 @@ public class UserRestController {
     }
 
     @PutMapping("/delete-user")
-    public void deleteUser(@RequestParam String email) {
-        businessController.deleteUser(email);
+    public MessageHandler deleteUser(@RequestParam String email) {
+        return businessController.deleteUser(email);
     }
 
     @PostMapping("/add-to-group")
     public void addUsersToGroup(@RequestBody List<Tbu4001> users){
             businessController.addUsersToGroup(users);
     }
-    @GetMapping("/get-groups")
-    public List<Tbugr001> getGroups() {
-        return businessController.getGroups();
+
+    @GetMapping("/get-groups-user")
+    public List<Tbugr001> getGroupsWithUser() {
+        return businessController.getGroupsWithUser();
     }
 
     @PostMapping("/add-group")
@@ -82,4 +86,8 @@ public class UserRestController {
         businessController.deleteGroup(name);
     }
 
+    @GetMapping("/get-groups")
+    public List<Groups> getGroups() {
+        return businessController.getGroups();
+    }
 }

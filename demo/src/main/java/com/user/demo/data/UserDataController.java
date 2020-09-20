@@ -1,6 +1,7 @@
 package com.user.demo.data;
 
 import com.user.demo.auth.CustomAuthenticationProvider;
+import com.user.demo.bean.Groups;
 import com.user.demo.bean.Tbu4001;
 import com.user.demo.bean.Tbugr001;
 import com.user.demo.repository.MyBatisRepository;
@@ -62,10 +63,12 @@ public class UserDataController {
             myBatisRepository.addUserToGroup(user);
     }
    
-    public List<Tbugr001> getGroups() {
+    public List<Tbugr001> getGroupsWithUser() {
+        return myBatisRepository.getGroupsWithUser();
+    }
+    public List<Groups> getGroups() {
         return myBatisRepository.getGroups();
     }
-
     
     public void addGroup( String name){
         myBatisRepository.addGroup(name);

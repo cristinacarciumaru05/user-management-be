@@ -12,7 +12,6 @@ public class Tbu4001 {
     private String f_name;
     private String email;
     private String password;
-    private String group;
 
     public int getId() {
         return id;
@@ -52,13 +51,5 @@ public class Tbu4001 {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getGroup() {
-        return group;
-    }
-
-    public void setGroup(String group) {
-        this.group = group;
     }
 }

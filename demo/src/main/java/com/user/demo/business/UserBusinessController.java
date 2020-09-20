@@ -2,6 +2,7 @@ package com.user.demo.business;
 
 import com.user.demo.MessageHandler;
 import com.user.demo.auth.CustomAuthenticationProvider;
+import com.user.demo.bean.Groups;
 import com.user.demo.bean.Tbu4001;
 import com.user.demo.bean.Tbugr001;
 import com.user.demo.data.UserDataController;
@@ -57,21 +58,50 @@ public class UserBusinessController {
         return userDataController.findByEmail(email);
     }
 
-
-    public void addUser(Tbu4001 user){
-        userDataController.addUser(user);
+    public MessageHandler addUser(Tbu4001 user){
+        if(userDataController.findByEmail(user.getEmail()) == null) {
+            userDataController.addUser(user);
+            messageHandler.setLevel("INFO");
+            messageHandler.setMessage("OK");
+        } else {
+            messageHandler.setLevel("ERROR");
+            messageHandler.setMessage("This email is already used! Please try again");
+        }
+        return messageHandler;
     }
-
 
     public void updateUser(Tbu4001 user){
         userDataController.updateUser(user);
     }
 
+    public MessageHandler deleteUser(String email) {
+        if(userDataController.findByEmail(email) != null){
 
-    public void deleteUser(String email) {
-        userDataController.deleteUser(email);
+            if(!isAdmin(email)){
+                if(!getCurrentUser().getEmail().equals(email)){
+                    userDataController.deleteUser(email);
+                    messageHandler.setLevel("INFO");
+                    messageHandler.setMessage("OK");
+                } else {
+                    messageHandler.setLevel("ERROR");
+                    messageHandler.setMessage("You cannot delete yourself! Please try again");
+                }
+            } else {
+                if(email.equals(getCurrentUser().getEmail())) {
+                    messageHandler.setLevel("ERROR");
+                    messageHandler.setMessage("You cannot delete yourself! Please try again");
+                } else {
+                    messageHandler.setLevel("ERROR");
+                    messageHandler.setMessage("You cannot delete admin user ! Please try again");
+                }
+            }
+        } else {
+            messageHandler.setLevel("ERROR");
+            messageHandler.setMessage("This email does not exists! Please try again");
+        }
+        return messageHandler;
+
     }
-
 
     public void addUsersToGroup(List<Tbu4001> users){
         for (Tbu4001 user :users) {
@@ -79,17 +109,26 @@ public class UserBusinessController {
         }
     }
 
-    public List<Tbugr001> getGroups() {
-        return userDataController.getGroups();
+    public List<Tbugr001> getGroupsWithUser() {
+        return userDataController.getGroupsWithUser();
     }
 
+    public List<Groups> getGroups() {
+        return userDataController.getGroups();
+    }
 
     public void addGroup( String name){
         userDataController.addGroup(name);
     }
 
-
     public void deleteGroup( String name) {
         userDataController.deleteGroup(name);
+    }
+
+    public boolean isAdmin(String email) {
+        if(email== "admin"){
+            return true;
+        }
+        return false;
     }
 }
