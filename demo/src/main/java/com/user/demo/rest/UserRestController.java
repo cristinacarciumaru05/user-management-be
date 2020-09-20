@@ -2,7 +2,7 @@ package com.user.demo.rest;
 
 import com.user.demo.MessageHandler;
 import com.user.demo.auth.CustomAuthenticationProvider;
-import com.user.demo.bean.Groups;
+import com.user.demo.bean.Tbgroups;
 import com.user.demo.bean.Tbu4001;
 import com.user.demo.bean.Tbugr001;
 import com.user.demo.business.UserBusinessController;
@@ -67,13 +67,19 @@ public class UserRestController {
     }
 
     @PostMapping("/add-to-group")
-    public void addUsersToGroup(@RequestBody List<Tbu4001> users){
-            businessController.addUsersToGroup(users);
+    public void addUsersToGroup(@RequestParam String email,
+                                @RequestParam String name) {
+            businessController.addUsersToGroup(email,name);
     }
 
     @GetMapping("/get-groups-user")
     public List<Tbugr001> getGroupsWithUser() {
         return businessController.getGroupsWithUser();
+    }
+
+    @GetMapping("/find-group")
+    public Tbgroups findGroup(@RequestParam String name) {
+        return businessController.findGroup(name);
     }
 
     @PostMapping("/add-group")
@@ -86,8 +92,14 @@ public class UserRestController {
         businessController.deleteGroup(name);
     }
 
+    @PutMapping("/delete-user-from-group")
+    public void deleteUserFromGroup(@RequestParam String email,
+                                    @RequestParam String name) {
+        businessController.deleteUserFromGroup(email,name);
+    }
+
     @GetMapping("/get-groups")
-    public List<Groups> getGroups() {
+    public List<Tbgroups> getGroups() {
         return businessController.getGroups();
     }
 }

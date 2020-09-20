@@ -1,7 +1,7 @@
 package com.user.demo.data;
 
 import com.user.demo.auth.CustomAuthenticationProvider;
-import com.user.demo.bean.Groups;
+import com.user.demo.bean.Tbgroups;
 import com.user.demo.bean.Tbu4001;
 import com.user.demo.bean.Tbugr001;
 import com.user.demo.repository.MyBatisRepository;
@@ -59,14 +59,14 @@ public class UserDataController {
     }
 
 
-    public void addUsersToGroup(Tbu4001 user){
-            myBatisRepository.addUserToGroup(user);
+    public void addUsersToGroup(String email, String name){
+            myBatisRepository.addUserToGroup(email,name);
     }
    
     public List<Tbugr001> getGroupsWithUser() {
         return myBatisRepository.getGroupsWithUser();
     }
-    public List<Groups> getGroups() {
+    public List<Tbgroups> getGroups() {
         return myBatisRepository.getGroups();
     }
     
@@ -79,7 +79,22 @@ public class UserDataController {
         myBatisRepository.deleteGroup(name);
     }
 
+    public Tbugr001 findUserGroup(String name) {
+        return myBatisRepository.findUserGroup(name);
+    }
+    public Tbgroups findGroup( String name) {
+        return myBatisRepository.findGroup(name);
+    }
     public boolean checkPassword(String email, String password){
         return myBatisRepository.checkPassword(email,password);
     }
+
+    public void deleteUserGroup(String name) {
+        myBatisRepository.deleteUserGroup(name);
+    }
+    public void deleteUserFromGroup(String email,String name) {
+        myBatisRepository.deleteUserFromGroup(email,name);
+    }
 }
+
+

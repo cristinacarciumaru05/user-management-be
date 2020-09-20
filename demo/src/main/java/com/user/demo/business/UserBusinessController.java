@@ -2,7 +2,7 @@ package com.user.demo.business;
 
 import com.user.demo.MessageHandler;
 import com.user.demo.auth.CustomAuthenticationProvider;
-import com.user.demo.bean.Groups;
+import com.user.demo.bean.Tbgroups;
 import com.user.demo.bean.Tbu4001;
 import com.user.demo.bean.Tbugr001;
 import com.user.demo.data.UserDataController;
@@ -103,17 +103,15 @@ public class UserBusinessController {
 
     }
 
-    public void addUsersToGroup(List<Tbu4001> users){
-        for (Tbu4001 user :users) {
-            userDataController.addUsersToGroup(user);
-        }
+    public void addUsersToGroup(String email, String name){
+            userDataController.addUsersToGroup(email,name);
     }
 
     public List<Tbugr001> getGroupsWithUser() {
         return userDataController.getGroupsWithUser();
     }
 
-    public List<Groups> getGroups() {
+    public List<Tbgroups> getGroups() {
         return userDataController.getGroups();
     }
 
@@ -122,7 +120,14 @@ public class UserBusinessController {
     }
 
     public void deleteGroup( String name) {
+        if(userDataController.findUserGroup(name) != null) {
+            userDataController.deleteUserGroup(name);
+        }
         userDataController.deleteGroup(name);
+    }
+
+    public void deleteUserFromGroup(String email, String name) {
+            userDataController.deleteUserFromGroup(email,name);
     }
 
     public boolean isAdmin(String email) {
@@ -130,5 +135,9 @@ public class UserBusinessController {
             return true;
         }
         return false;
+    }
+
+    public Tbgroups findGroup(String name){
+       return userDataController.findGroup(name);
     }
 }

@@ -1,6 +1,6 @@
 package com.user.demo.repository;
 
-import com.user.demo.bean.Groups;
+import com.user.demo.bean.Tbgroups;
 import com.user.demo.bean.Tbu4001;
 import com.user.demo.bean.Tbugr001;
 import org.apache.ibatis.annotations.Mapper;
@@ -31,24 +31,35 @@ public interface MyBatisRepository {
             " l_name=#{l_name} where email=#{email}")
     public int update(Tbu4001 user);
 
-    @Update("Update tbu4001 set group=#{group}, " +
-            " where email=#{email}")
-    public int addUserToGroup(Tbu4001 user);
+    @Update("Insert into tbugr001(email,name) values(#{email}, #{name}) ")
+    public int addUserToGroup(String email, String name);
 
     @Select("select * from tbugr001")
     public List<Tbugr001> getGroupsWithUser();
 
-    @Insert("INSERT INTO tbugr001(name) " +
+    @Insert("INSERT INTO Tbgroups(name) " +
             " VALUES (#{name})")
     public int addGroup(String name);
 
-    @Delete("DELETE FROM tbugr001 WHERE email = #{name} ")
+    @Delete("DELETE FROM tbgroups WHERE name = #{name} ")
     public int deleteGroup(String name);
 
     @Select("SELECT * FROM tbu4001 where email =#{email} AND password=#{password}")
     public boolean checkPassword(String email, String password);
 
-    @Select("SELECT * FROM groups ")
-    public List<Groups> getGroups();
+    @Select("SELECT * FROM Tbgroups")
+    public List<Tbgroups> getGroups();
 
+    @Select("SELECT * FROM Tbgroups where name =#{name}")
+    public Tbgroups findGroup(String name);
+
+    @Select("SELECT * FROM tbugr001 where name =#{name}")
+    public Tbugr001 findUserGroup(String name);
+
+    @Delete("DELETE FROM tbugr001 where name =#{name}")
+    public void deleteUserGroup(String name);
+
+
+    @Delete("DELETE FROM tbugr001 where email =#{email} and name=#{name}")
+    public void deleteUserFromGroup(String email,String name);
 }
