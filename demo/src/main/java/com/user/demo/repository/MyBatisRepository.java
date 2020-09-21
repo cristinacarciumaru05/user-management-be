@@ -45,7 +45,7 @@ public interface MyBatisRepository {
     public int deleteGroup(String name);
 
     @Select("SELECT * FROM tbu4001 where email =#{email} AND password=#{password}")
-    public boolean checkPassword(String email, String password);
+    public String checkPassword(String email, String password);
 
     @Select("SELECT * FROM Tbgroups")
     public List<Tbgroups> getGroups();

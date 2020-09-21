@@ -28,8 +28,10 @@ public class UserBusinessController {
     }
 
     public MessageHandler setCurrentUser(Tbu4001 user){
+        messageHandler.setLevel("");
+        messageHandler.setMessage("");
         if ( userDataController.findByEmail(user.getEmail())!=null &&
-           userDataController.checkPassword(user.getEmail(), user.getPassword()) ) {
+           userDataController.checkPassword(user.getEmail(), user.getPassword()) != null ) {
 
             authenticationProvider.setUser(userDataController.findByEmail(user.getEmail()));
             messageHandler.setLevel("INFO");
@@ -59,6 +61,8 @@ public class UserBusinessController {
     }
 
     public MessageHandler addUser(Tbu4001 user){
+        messageHandler.setLevel("");
+        messageHandler.setMessage("");
         if(userDataController.findByEmail(user.getEmail()) == null) {
             userDataController.addUser(user);
             messageHandler.setLevel("INFO");
@@ -75,6 +79,8 @@ public class UserBusinessController {
     }
 
     public MessageHandler deleteUser(String email) {
+        messageHandler.setLevel("");
+        messageHandler.setMessage("");
         if(userDataController.findByEmail(email) != null){
 
             if(!isAdmin(email)){

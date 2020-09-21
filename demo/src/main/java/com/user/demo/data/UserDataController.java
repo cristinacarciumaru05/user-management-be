@@ -85,7 +85,7 @@ public class UserDataController {
     public Tbgroups findGroup( String name) {
         return myBatisRepository.findGroup(name);
     }
-    public boolean checkPassword(String email, String password){
+    public String checkPassword(String email, String password){
         return myBatisRepository.checkPassword(email,password);
     }
 
