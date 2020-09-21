@@ -79,7 +79,7 @@ public class UserDataController {
         myBatisRepository.deleteGroup(name);
     }
 
-    public Tbugr001 findUserGroup(String name) {
+    public List<Tbugr001> findUserGroup(String name) {
         return myBatisRepository.findUserGroup(name);
     }
     public Tbgroups findGroup( String name) {

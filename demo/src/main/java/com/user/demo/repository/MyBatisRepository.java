@@ -54,7 +54,7 @@ public interface MyBatisRepository {
     public Tbgroups findGroup(String name);
 
     @Select("SELECT * FROM tbugr001 where name =#{name}")
-    public Tbugr001 findUserGroup(String name);
+    public List<Tbugr001>  findUserGroup(String name);
 
     @Select("SELECT * FROM tbugr001 where email =#{email}")
     public List<Tbugr001> findGroupByUser(String email);
